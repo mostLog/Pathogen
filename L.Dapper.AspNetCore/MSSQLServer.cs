@@ -1,8 +1,10 @@
 ﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+
 
 namespace L.Dapper.AspNetCore
 {
@@ -22,11 +24,112 @@ namespace L.Dapper.AspNetCore
         }
 
         /// <summary>
+        /// 添加
+        /// </summary>
+        public static long Insert<T>(this IDbConnection db,T t) where T : class
+        {
+            try
+            {
+                CheckDbState(db);
+                return db.Insert(t);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+    
+        }
+
+        
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <returns></returns>
+        public static long Delete<T>(this IDbConnection db,T t)
+        {
+            try
+            {
+                CheckDbState(db);
+                return db.Delete(t);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="db"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static long Update<T>(this IDbConnection db,T t)
+        {
+            try
+            {
+                CheckDbState(db);
+                return db.Update(t);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 获取单个实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="db"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static T Get<T>(this IDbConnection db,int id)
+        {
+            try
+            {
+                CheckDbState(db);
+                return db.Get<T>(id);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// 查询
         /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="db"></param>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public static IEnumerable<T> QueryList<T>(this IDbConnection db, string sql, object param)
         {
             return db.Query<T>(sql, param);
+        }
+        /// <summary>
+        /// 多条sql查询
+        /// </summary>
+        /// <returns></returns>
+        public static SqlMapper.GridReader QueryMul(this IDbConnection db,string sql,object param)
+        {
+            try
+            {
+                CheckDbState(db);
+                return db.QueryMultiple(sql, param);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -50,15 +153,6 @@ namespace L.Dapper.AspNetCore
         }
 
         /// <summary>
-        /// 添加
-        /// </summary>
-        public static int Insert<T>(this IDbConnection db, string sql, T t) where T : class
-        {
-
-            return db.Execute(sql, t);
-        }
-
-        /// <summary>
         /// 执行sql语句
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -70,6 +164,8 @@ namespace L.Dapper.AspNetCore
         {
             return db.Execute(sql, p);
         }
+
+
         /// <summary>
         /// 执行sql语句
         /// </summary>
@@ -81,6 +177,18 @@ namespace L.Dapper.AspNetCore
         public static async Task<int> ExcuteSqlAsync<T>(this IDbConnection db, string sql, T p)
         {
             return await db.ExecuteAsync(sql, p);
+        }
+
+        /// <summary>
+        /// 检测数据库状态
+        /// </summary>
+        private static void CheckDbState(IDbConnection db)
+        {
+            //如果连接已关闭
+            if (db.State == ConnectionState.Closed)
+            {
+                db.Open();
+            }
         }
     }
 }

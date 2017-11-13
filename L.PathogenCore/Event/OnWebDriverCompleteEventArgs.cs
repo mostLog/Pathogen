@@ -1,7 +1,6 @@
-﻿using OpenQA.Selenium.PhantomJS;
-using System;
+﻿using System;
 
-namespace L.SpiderCore.Event
+namespace L.PathogenCore
 {
     /// <summary>
     /// 当爬虫执行完参数传递
@@ -23,10 +22,7 @@ namespace L.SpiderCore.Event
         /// </summary>
         public long Duration { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
-        public PhantomJSDriver Driver { get; set; }
+      
 
         public OnWebDriverCompleteEventArgs()
         {

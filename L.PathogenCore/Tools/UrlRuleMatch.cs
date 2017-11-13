@@ -1,4 +1,4 @@
-﻿namespace L.SpiderCore.Tools
+﻿namespace L.PathogenCore
 {
     /// <summary>
     /// 规则匹配

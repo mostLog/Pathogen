@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.Pathogen
+namespace L.PathogenCore
 {
     public class UrlPathogen : SinglePathogen
     {

@@ -1,7 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.Linq;
 
-namespace L.SpiderCore.Tools
+namespace L.PathogenCore
 {
     /// <summary>
     /// XPath方式选择器

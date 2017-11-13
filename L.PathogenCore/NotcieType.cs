@@ -1,4 +1,4 @@
-﻿namespace L.SpiderCore
+﻿namespace L.PathogenCore
 {
     public enum NotcieType
     {

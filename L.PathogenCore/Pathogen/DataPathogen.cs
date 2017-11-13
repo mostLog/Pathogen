@@ -1,4 +1,4 @@
-﻿namespace L.Pathogen
+﻿namespace L.PathogenCore
 {
     public class DataPathogen:SinglePathogen
     {

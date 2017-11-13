@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace L.Pathogen
+namespace L.PathogenCore
 {
     public class SinglePathogen : IPathogen
     {

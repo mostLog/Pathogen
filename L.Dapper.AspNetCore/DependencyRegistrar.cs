@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using L.Dapper.AspNetCore.DbManager;
 using L.LCore.Infrastructure.Dependeny;
 
 namespace L.Dapper.AspNetCore
@@ -19,10 +18,6 @@ namespace L.Dapper.AspNetCore
             })).SingleInstance();
 
             builder.RegisterType<DbFactory>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<DbManagerDataProvider>()
-                .As<IDbManagerDataProvider>()
                 .InstancePerLifetimeScope();
         }
 

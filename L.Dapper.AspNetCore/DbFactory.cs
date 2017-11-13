@@ -11,10 +11,14 @@ namespace L.Dapper.AspNetCore
             _dapper = dapper;
         }
 
-        public IDbConnection GetDbInstance()
+        public IDbConnection GetDbInstance(Dapper dapper=null)
         {
             //获取配置信息
             var config = _dapper.Config;
+            if (dapper!=null)
+            {
+                config = dapper.Config;
+            }
             IDbConnection db = MSSQLServer.GetDbInstance(config.ConnectionString);
             switch (config.DbType)
             {

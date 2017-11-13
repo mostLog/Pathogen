@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.Pathogen
+namespace L.PathogenCore
 {
     /// <summary>
     /// 病原体接口

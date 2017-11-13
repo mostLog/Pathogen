@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Text;
 
-namespace L.Pathogen
+namespace L.PathogenCore
 {
     /// <summary>
     /// 感染管理

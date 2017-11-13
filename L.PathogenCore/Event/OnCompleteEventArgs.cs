@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace L.SpiderCore.Event
+namespace L.PathogenCore
 {
     /// <summary>
     /// 当爬虫执行完参数传递

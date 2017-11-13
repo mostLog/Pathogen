@@ -16,6 +16,7 @@ namespace L.LCore.Infrastructure.Extension
             return serviceProvider;
         }
 
+
         public static void ConfigureRequestMiddleware(this IApplicationBuilder app)
         {
             var engine = LCoreEngineManager.CurrentEngine();

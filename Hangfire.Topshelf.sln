@@ -3,17 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangfire.Topshelf", "Hangfire.Topshelf\Hangfire.Topshelf.csproj", "{0DC13E49-27F5-48C9-ADBE-E164A78F6DA9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.Dapper.AspNetCore", "L.Dapper.AspNetCore\L.Dapper.AspNetCore.csproj", "{5E7DE04D-29CE-4A89-B958-EE9CDB8F7E2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.Dapper.AspNetCore", "L.Dapper.AspNetCore\L.Dapper.AspNetCore.csproj", "{5E7DE04D-29CE-4A89-B958-EE9CDB8F7E2E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.LCore", "L.LCore\L.LCore.csproj", "{DB0FFDD7-6365-4CE2-8FC7-9D1364C6FADE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.PathogenServices", "L.PathogenServices\L.PathogenServices.csproj", "{88EBBC23-EC41-4685-9005-5875315BD771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.PathogenServices", "L.PathogenServices\L.PathogenServices.csproj", "{88EBBC23-EC41-4685-9005-5875315BD771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.PathogenCore", "L.PathogenCore\L.PathogenCore.csproj", "{2D40FFC7-7976-474D-BE6F-8AE95BF18ACA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.PathogenCore", "L.PathogenCore\L.PathogenCore.csproj", "{2D40FFC7-7976-474D-BE6F-8AE95BF18ACA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{24F30044-F3DA-4BAE-A981-BBEF26805EF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.HangFire.AspNetCore", "L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj", "{0195146C-E5D1-4026-BEF9-4DA1BD7997A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangfire.PathogenWindowService", "Hangfire.PathogenWindowService\Hangfire.PathogenWindowService.csproj", "{E08B3944-96D3-45CF-842E-2B80BEAD8C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowService.Test", "WindowService.Test\WindowService.Test.csproj", "{AB96CF33-A5A3-4730-8456-58B2C1EA443E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.PathogenIdentityServer", "L.PathogenIdentityServer\L.PathogenIdentityServer.csproj", "{773A1254-91CD-4B71-A9AB-E599AC9F5DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0DC13E49-27F5-48C9-ADBE-E164A78F6DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DC13E49-27F5-48C9-ADBE-E164A78F6DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0DC13E49-27F5-48C9-ADBE-E164A78F6DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DC13E49-27F5-48C9-ADBE-E164A78F6DA9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E7DE04D-29CE-4A89-B958-EE9CDB8F7E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E7DE04D-29CE-4A89-B958-EE9CDB8F7E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7DE04D-29CE-4A89-B958-EE9CDB8F7E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,12 +43,29 @@ Global
 		{2D40FFC7-7976-474D-BE6F-8AE95BF18ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D40FFC7-7976-474D-BE6F-8AE95BF18ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D40FFC7-7976-474D-BE6F-8AE95BF18ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0195146C-E5D1-4026-BEF9-4DA1BD7997A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0195146C-E5D1-4026-BEF9-4DA1BD7997A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0195146C-E5D1-4026-BEF9-4DA1BD7997A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0195146C-E5D1-4026-BEF9-4DA1BD7997A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08B3944-96D3-45CF-842E-2B80BEAD8C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08B3944-96D3-45CF-842E-2B80BEAD8C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08B3944-96D3-45CF-842E-2B80BEAD8C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08B3944-96D3-45CF-842E-2B80BEAD8C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB96CF33-A5A3-4730-8456-58B2C1EA443E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB96CF33-A5A3-4730-8456-58B2C1EA443E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB96CF33-A5A3-4730-8456-58B2C1EA443E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB96CF33-A5A3-4730-8456-58B2C1EA443E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{773A1254-91CD-4B71-A9AB-E599AC9F5DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{773A1254-91CD-4B71-A9AB-E599AC9F5DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{773A1254-91CD-4B71-A9AB-E599AC9F5DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{773A1254-91CD-4B71-A9AB-E599AC9F5DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5E7DE04D-29CE-4A89-B958-EE9CDB8F7E2E} = {24F30044-F3DA-4BAE-A981-BBEF26805EF0}
+		{0195146C-E5D1-4026-BEF9-4DA1BD7997A6} = {24F30044-F3DA-4BAE-A981-BBEF26805EF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00E36074-1E3F-432A-992C-E1BA2F452CC1}

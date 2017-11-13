@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace L.Pathogen
+namespace L.PathogenCore
 {
     /// <summary>
     /// 数据解析器

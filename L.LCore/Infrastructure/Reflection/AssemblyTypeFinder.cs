@@ -45,8 +45,9 @@ namespace L.LCore.Infrastructure.Reflection
                     var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
                     list.Add(assembly);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    throw new Exception(e.Message);
                 }
             }
             return list;
