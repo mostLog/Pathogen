@@ -19,14 +19,14 @@ namespace L.Dapper.AspNetCore
             {
                 config = dapper.Config;
             }
-            IDbConnection db = MSSQLServer.GetDbInstance(config.ConnectionString);
+            IDbConnection db = null;
             switch (config.DbType)
             {
                 case DbType.MSSQLServer:
                     db = MSSQLServer.GetDbInstance(config.ConnectionString);
                     break;
-
                 default:
+                    db = MSSQLServer.GetDbInstance(config.ConnectionString);
                     break;
             }
             return db;

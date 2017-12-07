@@ -25,21 +25,25 @@ namespace L.PathogenServices.Processor.Biquge.cc
             string url = resultDatas["requestUrl"] as string;
             try
             {
-                string content = resultDatas["article"] as string;
-                //获取文章对象
-                Article article = resultDatas["extraObj"] as Article;
-                if (!string.IsNullOrEmpty(content))
+                if (resultDatas.Keys.Contains("article")&&resultDatas.Keys.Contains("extraObj"))
                 {
-                    article.Content = content;
-                }
-                article.IsCrawlerContent = true;
-                //更新信息
-                _novelService.UpdateArticel(article);
-                //是否启动邮件发送
-                if (article.Novel != null && article.Novel.IsOpenEmail)
-                {
-                    //发送邮件
-                    EmailHelper.SendEmail(article.Title, content, new List<string>() { "2434934089@qq.com" });
+                    string content = resultDatas["article"] as string;
+                    if (!string.IsNullOrEmpty(content))
+                    {
+                        //获取文章对象
+                        Article article = resultDatas["extraObj"] as Article;
+                        article.Content = content;
+                        article.IsCrawlerContent = true;
+                        //更新信息
+                        _novelService.UpdateArticel(article);
+                        System.Diagnostics.Debug.WriteLine("url:" + url + "/n" + "content:" + content);
+                        //是否启动邮件发送
+                        if (article.Novel != null && article.Novel.IsOpenEmail)
+                        {
+                            //发送邮件
+                            EmailHelper.SendEmail(article.Title, content, new List<string>() { "2434934089@qq.com" });
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -59,15 +63,14 @@ namespace L.PathogenServices.Processor.Biquge.cc
             {
                 //添加请求地址
                 pagePathogen.AddResult("requestUrl",pagePathogen.Url);
-                var selector = new XPathSelector(pagePathogen.PageSource);
-                var node = selector.SelectSingleNode("//*[@id='content']");
-                if (node != null)
+                if (!string.IsNullOrEmpty(pagePathogen.PageSource))
                 {
-                    pagePathogen.AddResult("article", node.InnerHtml);
-                }
-                else
+                    var selector = new XPathSelector(pagePathogen.PageSource);
+                    var node = selector.SelectSingleNode("//*[@id='content']");
+                    pagePathogen.AddResult("article", node?.InnerHtml ?? string.Empty);
+                }else
                 {
-                   
+                    pagePathogen.AddResult("article", string.Empty);
                 }
             }
             catch (Exception e)

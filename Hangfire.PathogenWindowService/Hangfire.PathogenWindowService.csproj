@@ -8,9 +8,16 @@
     <DocumentationFile>bin\Debug\netcoreapp2.0\Hangfire.PathogenWindowService.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.0\Hangfire.PathogenWindowService.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\TSManageController.cs" />
+  </ItemGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <Folder Include="Extension\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj" />
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
     <ProjectReference Include="..\L.PathogenServices\L.PathogenServices.csproj" />
   </ItemGroup>

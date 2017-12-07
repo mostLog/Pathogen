@@ -41,6 +41,8 @@ namespace L.PathogenCore
         /// <param name="url"></param>
         public virtual void Infected()
         {
+            //初始化目标
+            SetInfectionTargets();
             //初始化线程数
             for (int i = 0; i < _task.Length; i++)
             {
@@ -97,6 +99,14 @@ namespace L.PathogenCore
                     _processor.DataProcess(pagePathogen.ResultList);
                 }
             }
+        }
+
+        /// <summary>
+        /// 设置爬取目标
+        /// </summary>
+        public virtual void SetInfectionTargets()
+        {
+
         }
     }
 }

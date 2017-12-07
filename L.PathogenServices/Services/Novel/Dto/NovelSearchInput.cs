@@ -20,6 +20,6 @@
         /// <summary>
         /// 是否开启邮件推送
         /// </summary>
-        public bool IsOpenEmail { get; set; }
+        public bool? IsOpenEmail { get; set; }
     }
 }

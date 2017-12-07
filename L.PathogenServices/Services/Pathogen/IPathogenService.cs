@@ -15,6 +15,8 @@ namespace L.PathogenServices.Services
         /// <returns></returns>
         PathogenOuput GetPathogenById(string pathogenId);
 
+        void UpdatePathogenStatus(string pathogenId, bool isRun);
+
         /// <summary>
         /// 启动或关闭pathogen
         /// </summary>

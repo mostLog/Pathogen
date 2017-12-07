@@ -1,7 +1,9 @@
 ﻿using Hangfire.PathogenWindowService.Dto;
+using Hangfire.PathogenWindowService.Extension;
+using L.HangFire.AspNetCore.Services;
 using L.PathogenServices.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace Hangfire.PathogenWindowService.Controllers
 {
@@ -9,53 +11,51 @@ namespace Hangfire.PathogenWindowService.Controllers
     /// pathogen服务接口
     /// </summary>
     [Route("api/[controller]/[action]")]
-    public class PathogenController: Controller
+    [EnableCors("AllowCor")]
+    public class PathogenController: ControllerBase
     {
 
         private readonly IPathogenService _pathogenService;
+        private readonly IHangFireService _hangFireService;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pathogenService"></param>
-        public PathogenController(IPathogenService pathogenService)
+        public PathogenController(IPathogenService pathogenService,IHangFireService hangFireService)
         {
             _pathogenService = pathogenService;
+            _hangFireService = hangFireService;
         }
 
         /// <summary>
-        /// 
+        /// 启动或者关闭pathogen
         /// </summary>
-        /// <param name="productId"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
         public IActionResult RunOrStopPathogen(RunOrStopInput input)
         {
-            var pathogen = _pathogenService.GetPathogenById(input.PathogenId);
-            if (pathogen != null)
+            //参数合法性校验
+            if (ModelState.IsValid)
             {
-                //开启循环
-                if (input.IsRecurrent)
+                var pathogen = _pathogenService.GetPathogenById(input.PathogenId);
+                if (pathogen != null)
                 {
-                    RecurringJob.AddOrUpdate<IPathogenService>(
-                        input.PathogenId,
-                        a => a.RunOrStopPathogen(input.PathogenId),
-                        pathogen.RecurrentCron,
-                        TimeZoneInfo.Local);
+                    //开启或更新循环
+                    _hangFireService.AddRecurrentSchedule<IPathogenService>(
+                            input.PathogenId,
+                            a => a.RunOrStopPathogen(input.PathogenId),
+                            pathogen.RecurrentCron);
+                    //更新pathogen状态
+                    _pathogenService.UpdatePathogenStatus(input.PathogenId,input.IsRecurrent);
+                    return Ok("ok");
                 }
                 else
                 {
-                    RecurringJob.AddOrUpdate<IPathogenService>(
-                        input.PathogenId,
-                        a => a.RunOrStopPathogen(input.PathogenId),
-                        pathogen.RecurrentCron,
-                        TimeZoneInfo.Local);
+                    return BadRequest("pathogen不存在！");
                 }
             }
-            else
-            {
-                return Json("pathogen不存在！");
-            }
-            return Json(1);
+            return BadRequest(ModelState.GetModelStateError());
         }
     }
 }

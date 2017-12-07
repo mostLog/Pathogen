@@ -26,7 +26,7 @@ namespace L.Dapper.AspNetCore
         /// <summary>
         /// 添加
         /// </summary>
-        public static long Insert<T>(this IDbConnection db,T t) where T : class
+        public static long InsertEntity<T>(this IDbConnection db,T t) where T : class
         {
             try
             {
@@ -47,7 +47,7 @@ namespace L.Dapper.AspNetCore
         /// 删除
         /// </summary>
         /// <returns></returns>
-        public static long Delete<T>(this IDbConnection db,T t)
+        public static bool DeleteEntity<T>(this IDbConnection db,T t) where T:class
         {
             try
             {
@@ -68,7 +68,7 @@ namespace L.Dapper.AspNetCore
         /// <param name="db"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static long Update<T>(this IDbConnection db,T t)
+        public static bool UpdateEntity<T>(this IDbConnection db,T t) where T:class
         {
             try
             {
@@ -89,7 +89,7 @@ namespace L.Dapper.AspNetCore
         /// <param name="db"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static T Get<T>(this IDbConnection db,int id)
+        public static T GetEntity<T>(this IDbConnection db,int id) where T:class
         {
             try
             {
@@ -112,6 +112,7 @@ namespace L.Dapper.AspNetCore
         /// <returns></returns>
         public static IEnumerable<T> QueryList<T>(this IDbConnection db, string sql, object param)
         {
+            CheckDbState(db);
             return db.Query<T>(sql, param);
         }
         /// <summary>
@@ -142,6 +143,7 @@ namespace L.Dapper.AspNetCore
         /// <returns></returns>
         public static T QueryScalar<T>(this IDbConnection db, string sql, object param = null)
         {
+            CheckDbState(db);
             if (param == null)
             {
                 return db.ExecuteScalar<T>(sql);
@@ -162,6 +164,7 @@ namespace L.Dapper.AspNetCore
         /// <returns></returns>
         public static int ExcuteSql<T>(this IDbConnection db, string sql, T p)
         {
+            CheckDbState(db);
             return db.Execute(sql, p);
         }
 
@@ -176,6 +179,7 @@ namespace L.Dapper.AspNetCore
         /// <returns></returns>
         public static async Task<int> ExcuteSqlAsync<T>(this IDbConnection db, string sql, T p)
         {
+            CheckDbState(db);
             return await db.ExecuteAsync(sql, p);
         }
 

@@ -1,6 +1,7 @@
 ﻿using L.PathogenServices.Dto;
 using L.PathogenServices.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace L.Application.Services
 {
@@ -60,7 +61,7 @@ namespace L.Application.Services
         ///
         /// </summary>
         /// <param name="article"></param>
-        void UpdateArticel(Article article);
+        bool UpdateArticel(Article article);
 
         /// <summary>
         /// 获取数据库最新小说

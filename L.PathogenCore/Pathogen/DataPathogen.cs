@@ -16,12 +16,11 @@
         {
             _processor = processor;
             _dataReaderProcessor = dataReaderProcessor;
-
         }
         /// <summary>
         /// 设置感染目标
         /// </summary>
-        public void SetInfectionTargets()
+        public override void SetInfectionTargets()
         {
             foreach (var target in _dataReaderProcessor.Reader())
             {

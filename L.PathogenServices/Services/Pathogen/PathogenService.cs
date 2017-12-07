@@ -36,6 +36,18 @@ namespace L.PathogenServices.Services
         }
 
         /// <summary>
+        /// 更新Pathogen状态
+        /// </summary>
+        public void UpdatePathogenStatus(string pathogenId, bool isRun)
+        {
+            string sql = "update T_SpiderTask set IsRecurrent=@IsRecurrent where SpiderId=@SpiderId";
+            using (var db = _factory.GetDbInstance())
+            {
+                db.ExcuteSql(sql,new { IsRecurrent =isRun, SpiderId = pathogenId });
+            }
+        }
+
+        /// <summary>
         /// 启动或者停止pathogen
         /// </summary>
         /// <param name="pathogenId"></param>
@@ -47,6 +59,7 @@ namespace L.PathogenServices.Services
             {
                 case "ArticlePathogen":
                     pathogen = new DataPathogen(new ArticleProcessor(),new ArticleDataReaderProcessor());
+                    
                     break;
                 default:
                     break;

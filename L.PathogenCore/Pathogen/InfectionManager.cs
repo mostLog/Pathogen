@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
+using System.Threading;
 
 namespace L.PathogenCore
 {
@@ -17,20 +18,23 @@ namespace L.PathogenCore
             var request = (HttpWebRequest)WebRequest.Create(config.Url);
             request.Headers.Add(HttpRequestHeader.Accept, config.Accept);
             request.Headers.Add(HttpRequestHeader.UserAgent, config.UserAgent);
-            request.Headers.Add(HttpRequestHeader.ContentType, config.ContentType);
+            //request.Headers.Add(HttpRequestHeader.ContentType, config.ContentType);
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, config.AcceptEncoding);
             request.AllowWriteStreamBuffering = config.AllowWriteStreamBuffering;
             request.AllowAutoRedirect = config.AllowAutoRedirect;
-            request.Timeout = config.Timeout;
-            request.KeepAlive = config.KeepAlive;                       
+            request.Timeout = Timeout.Infinite;
+            request.KeepAlive = config.KeepAlive;
             request.Method = config.Method;
             return request;
         }
         public static PagePathogen GetResponse(HttpWebRequest request)
         {
-            var pagePathogen = new PagePathogen();
-            pagePathogen.Url = request.Address.AbsoluteUri;
-            pagePathogen.Host = request.Address.Host;
+            var pagePathogen = new PagePathogen
+            {
+                Url = request.Address.AbsoluteUri,
+                Host = request.Address.Host,
+                PageSource = string.Empty
+            };
             try
             {
                 using (var response = (HttpWebResponse)request.GetResponse())
@@ -58,7 +62,7 @@ namespace L.PathogenCore
                     }
                 }
             }
-           catch (Exception)
+            catch (Exception e)
             {
                 return pagePathogen;
             }
@@ -74,9 +78,9 @@ namespace L.PathogenCore
         public string Url { get; set; }
         //用户代理
         public string UserAgent { get; set; } = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36";
-        public string Accept { get; set; } = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        public string Accept { get; set; } = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
         public string ContentType { get; set; } = "application/x-www-form-urlencoded";
-        public string AcceptEncoding { get; set; } = "gzip,deflate";
+        public string AcceptEncoding { get; set; } = "gzip,deflate,br";
         //是否允许自动跳转
         public bool AllowAutoRedirect { get; set; } = false;
         //是否允许使用缓冲
@@ -84,7 +88,7 @@ namespace L.PathogenCore
         /// <summary>
         /// 超时时间
         /// </summary>
-        public int Timeout { get; set; } = 5000;
+        public int Timeout { get; set; } = 6000;
         //是否启用长连接
         public bool KeepAlive { get; set; } = true;
         /// <summary>

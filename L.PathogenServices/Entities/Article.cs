@@ -1,4 +1,5 @@
 ﻿using Dapper.Contrib.Extensions;
+using System;
 
 namespace L.PathogenServices.Entities
 {
@@ -44,9 +45,15 @@ namespace L.PathogenServices.Entities
         public int NovelId { get; set; }
 
         /// <summary>
+        /// 操作日期
+        /// </summary>
+        public DateTime OperaterDateTime { get; set; } = DateTime.Now;
+
+        /// <summary>
         /// 小说
         /// </summary>
         [Computed]
         public virtual Novel Novel { get; set; }
+
     }
 }

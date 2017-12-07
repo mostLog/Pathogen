@@ -1,12 +1,11 @@
 ﻿using L.LCore.Infrastructure.Extension;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.AspNetCore.Cors;
 using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 
 namespace Hangfire.PathogenWindowService
@@ -40,17 +39,27 @@ namespace Hangfire.PathogenWindowService
                 var xmlPath = Path.Combine(basePath, "Hangfire.PathogenWindowService.xml");
                 options.IncludeXmlComments(xmlPath);
             });
+            //添加允许跨域
+            services.AddCors(option =>
+            {
+                option.AddPolicy("AllowCor",
+                    bulder => bulder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    //设置允许访问的地址
+                    .WithOrigins("http://localhost:5000", "http://localhost:88")
+                    .AllowCredentials());
+            });
             services.AddMvcCore()
                 .AddAuthorization()
                 .AddJsonFormatters();
 
             services.AddAuthentication("Bearer")
-            .AddIdentityServerAuthentication("pathogen",options =>
-            {
-                options.Authority = "http://localhost:8889";
-                options.RequireHttpsMetadata = false;
-                options.ApiName = "api1";
-            });
+            .AddIdentityServerAuthentication("pathogen", options =>
+             {
+                 options.Authority = "http://localhost:8889";
+                 options.RequireHttpsMetadata = false;
+                 options.ApiName = "api1";
+             });
             return services.ConfigureApplicationServices(Configuration);
         }
 
